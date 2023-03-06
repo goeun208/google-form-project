@@ -7,7 +7,7 @@
 
 ### optional intern project (advanced project)
 
-- muk_chi_pa
+- [muk_chi_pa](https://github.com/mobiliverse-inc/intern-project/tree/main/muk_chi_pa/reference)
 
 ### optional intern project (nightmare project)
 
