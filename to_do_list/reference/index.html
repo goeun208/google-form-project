@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="header">
+        <p class="title">To do list</p>
+        <div class="input-wrap">
+            <input class="text-area" type="text" placeholder="typing to do list" onkeypress="handleKeyPressInput(event)">
+            <button onclick="addTodo()">
+                <span style="font-size: 2em; color: #1796ffbf;">
+                    <i class="fa-solid fa-plus"></i>
+                </span>
+            </button>
+        </div>
+    </div>
+    <div class="list-wrap">
+        <!-- <ul class="list-items">
+            <li class="list-item" key="1">
+                <input onchange="onChange(event)" class="checkbox" type="checkbox" id="1">
+                <div>
+                    <label for="1">read the book</label>
+                </div>
+                <span>
+                    <i class="fa-solid fa-xmark"></i>
+                </span>
+            </li>
+        </ul> -->
+    </div>
+</body>
+<script src="script.js"></script>
+<script src="https://kit.fontawesome.com/6bb3fec4a0.js" crossorigin="anonymous"></script>
+</html
