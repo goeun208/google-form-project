@@ -17,7 +17,7 @@
 - js
 
 # deploy
-> https://muk-chi-pa.netlify.app/
+> https://mobiliverse-muk-chi-pa.netlify.app/
 
 # 참고
 reference는 시간되면 작성해서 올릴께요! 아직 완성 안되어 있습니다.

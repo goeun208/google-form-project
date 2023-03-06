@@ -8,4 +8,4 @@
 - js (vanila js)
 
 # deploy
-> https://todo-list-vanila.netlify.app/
+> https://mobiliverse-todo-list-vanila.netlify.app/
