@@ -1,0 +1,108 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#header{
+    width: 100%;
+    height: 200px;
+    text-align: center;
+    position: fixed;
+    padding-top: 40px;
+    background: linear-gradient(aqua, blue);
+    z-index: 1;
+}
+
+#input-form {
+    display: flex;
+    padding: 0 10% 0 10%;
+}
+
+.title{
+    font-size: 50px;
+    color: white;
+    font-weight: bold;
+}
+
+#inputTodo {
+    flex: 1 0 0;
+    height: 45px;
+    border-radius: 50px;
+    padding: 20px;
+    border: none;
+    outline: none;
+}
+
+#inputTodo:focus {
+    box-shadow: 3px 3px black;
+}
+
+.pointer {
+    cursor:pointer;
+}
+
+.list-border {
+    border-top: solid rgba(128, 128, 128, 0.5) 1px;
+    border-bottom: solid rgba(128, 128, 128, 0.5) 1px;
+}
+
+#submit-button {
+    width: 45px;
+    height: 45px;
+    border-radius: 50px;
+    border: none;
+    font-size: 40px;
+    color: blue;
+    margin-left: 10px;
+    outline: none;
+}
+
+#submit-button:hover {
+    box-shadow: 3px 3px black;
+}
+
+#submit-button:active {
+    box-shadow: 5px 5px black;
+}
+
+#item-list {
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    list-style: none;
+    font-weight: bold;
+    position: absolute;
+    top: 220px;
+}
+
+.item {
+    width: 100%;
+    padding: 10px;
+    border-top: solid rgba(128, 128, 128, 0.2) 1px;
+    display: flex;
+    min-height: 50px;
+    align-items: center;
+}
+
+.item-label {
+    margin-left: 10px;
+    flex-grow: 1;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.button-style {
+    cursor: pointer;
+    font-weight: bold;
+    border: none;
+    background: none;
+    font-size: 18px;
+    width: 30px;
+    height: 30px;
+    border-radius: 20px;
+}
+
+.button-style:hover {
+    background-color: rgba(128, 128, 128, 0.3);
+}

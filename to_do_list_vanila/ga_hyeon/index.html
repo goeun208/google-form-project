@@ -5,8 +5,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
 </head>
 <body>
-    
+    <div id="header">
+        <p class="title">To do list</p>
+        <form onsubmit="return false" id="input-form">
+            <input id="inputTodo" type="text" placeholder="typing to do list" autocomplete="off" />
+            <button type="submit" id="submit-button" onclick="clickEvent()">+</button>
+        </form> 
+    </div>
+    <div>
+        <ul id="item-list">
+        </ul>
+    </div>
 </body>
 </html>
