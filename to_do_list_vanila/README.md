@@ -8,4 +8,4 @@
 - js (vanila js)
 
 # deploy
-> https://todo-list-sejin.netlify.app/
+> https://todo-list-vanila.netlify.app/
