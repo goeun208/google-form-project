@@ -1,18 +1,17 @@
-// const listItems = JSON.parse(localStorage.getItem('listItems')) || Array(0)
-const listItems = Array(0)
+const listItems = JSON.parse(localStorage.getItem('listItems')) || Array(0)
 
-// const handleLoadWindow = () => {
-//     // localStorage.removeItem('listItems')
+const handleLoadWindow = () => {
+    // localStorage.removeItem('listItems')
 
-//     [...listItems].reverse().forEach((listItem) => {
-//         setTodo(listItem)
-//     })
-//     document.querySelector('html').scrollTo({ top: 0, behavior: 'smooth' })
-// }
+    [...listItems].reverse().forEach((listItem) => {
+        setTodo(listItem)
+    })
+    document.querySelector('html').scrollTo({ top: 0, behavior: 'smooth' })
+}
 
-// const handleUnloadWindow = () => {
-//     localStorage.setItem('listItems', JSON.stringify(listItems))
-// }
+const handleUnloadWindow = () => {
+    localStorage.setItem('listItems', JSON.stringify(listItems))
+}
 
 // uuidv4 함수는 제가 짠거 아니고 찾아서 가져온겁니다... ㅎㅎ
 const uuidv4 = () => {
@@ -106,7 +105,6 @@ const handleResizeWindow = () => {
     listWrap.style.paddingTop = headerHeight +  offset + 'px';
 }
 
-// window.addEventListener('load', () => handleLoadWindow(), handleResizeWindow())
-// window.addEventListener('unload', handleUnloadWindow)
-window.addEventListener('load', handleResizeWindow)
+window.addEventListener('load', () => handleLoadWindow(), handleResizeWindow())
+window.addEventListener('unload', handleUnloadWindow)
 window.addEventListener('resize', handleResizeWindow)
