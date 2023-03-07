@@ -66,6 +66,22 @@
     box-shadow: 5px 5px black;
 }
 
+#reset-button {
+    top: 220px;
+    position: absolute;
+    margin-left: 10%;
+    font-size: 13px;
+    font-weight: bold;
+    background-color: white;
+    outline: none;
+    border: none;
+    border-radius: 50px;
+}
+
+#reset-button:hover {
+    background-color: rgba(128, 128, 128, 0.3);
+}
+
 #item-list {
     width: 80%;
     margin-left: 10%;
@@ -73,7 +89,7 @@
     list-style: none;
     font-weight: bold;
     position: absolute;
-    top: 220px;
+    top: 250px;
 }
 
 .item {
