@@ -47,7 +47,7 @@ function uuidv4() {
             todolist = todolist.map((e) => {
               return e.id == id ? {
                 ...e,
-                checked: !checked
+                checked: newInput.checked
               } : e
             })
         }
