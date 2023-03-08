@@ -7,6 +7,7 @@ var button1 = document.getElementById('button1');
 var button2 = document.getElementById('button2');
 var comNum, userNum = -1;
 
+// 0은 가위, 1은 바위, 2는 보
 const rockScissorsPaper = ['가위','바위','보'];
 const comImageSrc = [
     "images/computer_scissors.png",
@@ -22,8 +23,6 @@ const gameOverImageSrc = [
     "images/win.png",
     "images/defeat.png"
 ];
-
-// 0은 가위, 1은 바위, 2는 보
 
 var cImg = document.createElement('img');
 cImg.src = gameOverImageSrc[0];
@@ -94,8 +93,6 @@ function gameOver(){
 
 /*
 가위바위보 버튼 생성
-유저가 선택한 버튼에 따라 숫자 반환
-하나 선택하면 버튼이 사라지고 선택한 모양이 뜸
 */
 function addUserClickEvent() {
     button0.onclick = () => {
