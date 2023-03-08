@@ -106,7 +106,6 @@ function addUserClickEvent() {
     button2.onclick = () => {
         userNum = 2;
         uImg.src =  userImageSrc[userNum];
-        console.log(userImageSrc[userNum]);
     }
 }
 
