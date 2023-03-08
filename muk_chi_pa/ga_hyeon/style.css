@@ -1,0 +1,58 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#header {
+    height: 200px;
+    text-align: center;
+}
+
+#title {
+    height: 100px;
+    padding-top: 50px;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.start-button {
+    width: 100px;
+    height: 50px;
+    font-size: 20px;
+    background-color: white;
+}
+.try-again {
+    width: 150px;
+    height: 50px;
+    font-size: 20px;
+    background-color: red;
+}
+
+#computer {
+    width: 50%;
+    height: 400px;
+    float: left;
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+#user {
+    width: 50%;
+    height: 400px;
+    float:left;
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+#button0, #button1, #button2 {
+    visibility: hidden;
+}
+
+#npc {
+    clear: both;
+    height: 200px;
+    text-align: center;
+    font-size: 30px;
+}
