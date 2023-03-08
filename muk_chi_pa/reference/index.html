@@ -1,28 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-    <div class="document-wrap" onclick="handleClickDocumentWrap()">
-        <div class="document" onclick="event.stopPropagation()"> 
-            <ul>
-                <li> 컴퓨터와 승부하는 간단한 묵찌빠 게임을 작성하세요.</li>
-                <li> 컴퓨터는 매번 랜덤하게 제출합니다.</li>
-                <li> START 버튼을 누르면 게임이 시작 되며 버튼은 사라집니다.</li>
-                <li> 처음 가위바위보를 할 때는 3 → 2 → 1 카운트를 하고 시작합니다.</li>
-                <li> 가위바위보의 승패 상태에 따라서, 게임이 진행됩니다.</li>
-                <li> 가위바위보의 상태가 win인 참여자가 컴퓨터인 경우는 가위바위보 이후 랜덤한 시그널을 2초후에 제출합니다. 유저는 2초의 +0.2초 내로 내야 합니다.</li>
-                <li> 가위바위보의 상태가 win인 참여자가 참여자인 경우는 3초내로 아무때나 제출 할 수 있습니다. 참여자가 내자마자 컴퓨터는 랜덤한 값을 바로 계산해서 내도록 합니다. (혹은 미리 낼 것을 계산해서 참여자가 버튼을 누르는 순간 승패를 결정합니다)</li>
-                <li> 묵찌빠의 한 라운드의 승자가 결정이 나면 결과와 함께 TRY AGAIN 버튼을 출력하세요.</li>
+<html| lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+
+    <body>
+        <div class="document-wrap" onclick="handleClickDocumentWrap()">
+            <div class="document" onclick="event.stopPropagation()"> 
+                <ul>
+                    <li> 컴퓨터와 승부하는 간단한 묵찌빠 게임을 작성하세요.</li>
+                    <li> 컴퓨터는 매번 랜덤하게 제출합니다.</li>
+                    <li> START 버튼을 누르면 게임이 시작 되며 버튼은 사라집니다.</li>
+                    <li> 처음 가위바위보를 할 때는 3 → 2 → 1 카운트를 하고 시작합니다.</li>
+                    <li> 가위바위보의 승패 상태에 따라서, 게임이 진행됩니다.</li>
+                    <li> 가위바위보의 상태가 win인 참여자가 컴퓨터인 경우는 가위바위보 이후 랜덤한 시그널을 2초후에 제출합니다. 유저는 2초 +-0.5초 내로 내야 합니다.</li>
+                    <li> 가위바위보의 상태가 win인 참여자가 참여자인 경우는 3초내로 아무때나 제출 할 수 있습니다. 참여자가 내자마자 컴퓨터는 랜덤한 값을 바로 계산해서 내도록 합니다. (혹은 미리 낼 것을 계산해서 참여자가 버튼을 누르는 순간 승패를 결정합니다)</li>
+                    <li> 묵찌빠의 한 라운드의 승자가 결정이 나면 결과와 함께 TRY AGAIN 버튼을 출력하세요.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="header">
+            <div class="start-btn-wrap">
+                <button id="start-btn" onclick="handleClickStart()">START</button>
+            </div>
+            <p class="timer"></p>
+            <div class="signal-wrap">
+                <span class="first-signal">가위</span>
+                <span class="second-signal">바위</span>
+                <span class="third-signal">보!!</span>
+            </div>
+            <div class="versus-wrap">
+                <div class="computer-status-image"></div>
+                <span class="versus">vs</span>
+                <div class="user-status-image"></div>
+            </div>
+            <div class="result-wrap">
+                <div class="won"></div>
+            </div>
+        </div>
+        <div class="footer">
+            <ul class="user-selection-wrap">
+                <li>
+                    <button class="user-rock" onclick="setUserStatus('rock')" disabled>
+                    </button>
+                </li>
+                <li><button class="user-scissors" onclick="setUserStatus('scissors')" disabled>
+                    </button>
+                </li>
+                <li><button class="user-paper" onclick="setUserStatus('paper')" disabled>
+                    </button>
+                </li>
             </ul>
         </div>
-    </div>
-    <h1>묵찌빠 게임</h1>
-</body>
-<script src="script.js"></script>
-</html
+    </body>
+    <script src="script.js"></script>
+</html|
