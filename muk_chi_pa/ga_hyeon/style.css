@@ -46,6 +46,13 @@
     font-size: 20px;
 }
 
+.win::after {
+    position: absolute;
+    content: "<-공격!";
+    font-size: 15px;
+    color: red;
+}
+
 #button0, #button1, #button2 {
     visibility: hidden;
 }
