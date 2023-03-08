@@ -1,59 +1,88 @@
-const handleLoadWindow = () => {
-    document.querySelector(".document-wrap").style.display = 'flex'
-}
-
-const handleClickDocumentWrap = () => {
-    document.querySelector(".document-wrap").style.display = 'none'
-}
-
-window.addEventListener("load", handleLoadWindow)
-window.removeEventListener("unload", handleLoadWindow)
-
 let currentGame = 'rockScissorsPaper' // rockScissorsPaper or mukChiPa
 let currentWinner = null;
 let computerStatus = null;
 let userStatus = null;
 let winner = null;
-const term = 500;
+
+const startCount = 3,
+    term = 500,
+    컴퓨터가이기고있을때라운드시간 = 2000,
+    유저가이기고있을때라운드시간 = 3000;
 
 const rockScissorsPaperKoran = {
     rock: '묵',
     scissors: '찌',
     paper: '빠',
+},
+    rockScissorsPaperIndex = {
+        0: "rock",
+        1: "scissors",
+        2: "paper",
+    },
+    computerImages = {
+        rock: "url('images/computer_rock.png')",
+        scissors: "url('images/computer_scissors.png')",
+        paper: "url('images/computer_paper.png')",
+    },
+    userImages = {
+        rock: "url('images/user_rock.png')",
+        scissors: "url('images/user_scissors.png')",
+        paper: "url('images/user_paper.png')",
+    };
+
+const startBtnWrap = document.querySelector('.start-btn-wrap'),
+    timer = document.querySelector('.timer'),
+    signalWrap = document.querySelector('.signal-wrap'),
+    firstSignal = document.querySelector('.first-signal'),
+    secondSignal = document.querySelector('.second-signal'),
+    thirdSignal = document.querySelector('.third-signal'),
+    versusWrap = document.querySelector('.versus-wrap'),
+    computerStatusImage = document.querySelector('.computer-status-image'),
+    userStatusImage = document.querySelector('.user-status-image'),
+    userSelectionWrap = document.querySelector('.user-selection-wrap'),
+    userRock = document.querySelector('.user-rock'),
+    userScissors = document.querySelector('.user-scissors'),
+    userPaper = document.querySelector('.user-paper'),
+    resultWrap = document.querySelector('.result-wrap');
+
+const handleClickStart = async () => {
+    init()
+    await startTimer();
+    showVersusWrapAndUserSelectionWrap();
+    await startRound();
 }
 
-const rockScissorsPaperIndex = {
-    0: "rock",
-    1: "scissors",
-    2: "paper",
+const startRound = async () => {
+    setUserSelectionButtonDisabled(true)
+    setSignal();
+    await fight()
 }
 
-const computerImages = {
-    rock: "url('images/computer_rock.png')",
-    scissors: "url('images/computer_scissors.png')",
-    paper: "url('images/computer_paper.png')",
+const fight = async () => {
+    currentWinner === 'user' ? await 유저가이기고있을때규칙(3000) : await 컴퓨터가이기고있을때규칙(2000)
+    await delay(term);
+    mukChiPaRule();
+    decideWinner();
 }
 
-const userImages = {
-    rock: "url('images/user_rock.png')",
-    scissors: "url('images/user_scissors.png')",
-    paper: "url('images/user_paper.png')",
+const decideWinner = () => {
+    if (winner === 'computer') {
+        showResult('defeated')
+    } else if (winner === 'user') {
+        showResult('won')
+    } else {
+        startRound();
+    }
 }
 
-const startBtnWrap = document.querySelector('.start-btn-wrap');
-const timer = document.querySelector('.timer');
-const signalWrap = document.querySelector('.signal-wrap');
-const firstSignal = document.querySelector('.first-signal');
-const secondSignal = document.querySelector('.second-signal');
-const thirdSignal = document.querySelector('.third-signal');
-const versusWrap = document.querySelector('.versus-wrap');
-const computerStatusImage = document.querySelector('.computer-status-image');
-const userStatusImage = document.querySelector('.user-status-image');
-const userSelectionWrap = document.querySelector('.user-selection-wrap');
-const userRock = document.querySelector('.user-rock');
-const userScissors = document.querySelector('.user-scissors');
-const userPaper = document.querySelector('.user-paper')
-const resultWrap = document.querySelector('.result-wrap')
+const showResult = (type) => {
+    signalWrap.style.display = 'none'
+    startBtnWrap.style.display = 'block'
+    startBtnWrap.firstElementChild.innerHTML = 'TRY AGAIN?'
+    userSelectionWrap.style.display = 'none';
+    resultWrap.style.display = 'flex'
+    resultWrap.firstElementChild.className = type
+}
 
 const delay = (ms, callback) => {
     return new Promise((resolve) => {
@@ -80,111 +109,53 @@ const init = () => {
     resultWrap.style.display = 'none'
     versusWrap.style.display = 'none'
     timer.style.display = 'block'
-    timer.innerHTML = 3
+    timer.innerHTML = startCount
 }
 
-const handleClickStart = async () => {
-    init()
-    const ms = 2000
+const startTimer = async () => {
     const interval = setInterval(() => {
         timer.innerHTML = timer.innerHTML - 1
-    }, ms / 3)
-    await delay(ms)
+    }, 1000)
+    await delay(startCount * 1000)
     clearInterval(interval);
     timer.style.display = 'none'
-    start();
 }
 
-const start = async () => {
+const showVersusWrapAndUserSelectionWrap = () => {
+    versusWrap.style.display = 'flex'
+    userSelectionWrap.style.display = 'flex'
+}
+
+const setSignal = () => {
     firstSignal.style.display = 'none'
     secondSignal.style.display = 'none'
     thirdSignal.style.display = 'none'
     if (currentWinner === 'user') {
-        secondSignal.style.animationDelay = '1.5s'
-        thirdSignal.style.animationDelay = '3s'
+        secondSignal.style.animationDelay = (유저가이기고있을때라운드시간) / 1000 / 2 + 's'
+        thirdSignal.style.animationDelay = (유저가이기고있을때라운드시간) / 1000 + 's'
     } else {
-        secondSignal.style.animationDelay = '1s'
-        thirdSignal.style.animationDelay = '2s'
+        secondSignal.style.animationDelay = (컴퓨터가이기고있을때라운드시간) / 1000 / 2 + 's'
+        thirdSignal.style.animationDelay = (컴퓨터가이기고있을때라운드시간) / 1000 + 's'
     }
-
     setTimeout(() => {
         firstSignal.style.display = 'inline-block'
         secondSignal.style.display = 'inline-block'
         thirdSignal.style.display = 'inline-block'
     }, 20);
-    versusWrap.style.display = 'flex'
-    userSelectionWrap.style.display = 'flex'
-    compete()
 }
 
-const compete = async () => {
-    const ms = currentWinner === 'user' ? 3000 : 2000;
-    currentWinner === 'user' ? await currentWinnerUser(ms) : await currentWinnerComputer(ms)
-    gameLogic();
-    if (winner === 'computer') {
-        result('defeated')
-    } else if (winner === 'user') {
-        result('won')
-    } else {
-        start()
-    }
-}
-
-const setUserStatus = (selection) => {
-    userStatus = selection
-    userStatusImage.style.backgroundImage = userImages[selection];
-    if (currentGame === 'mukChiPa' && currentWinner === 'user') {
-        console.log(rockScissorsPaperKoran[selection])
-        thirdSignal.innerHTML = rockScissorsPaperKoran[selection] + '!!'
-    }
-}
-
-const setComputerStatus = () => {
-    computerStatus = rockScissorsPaperIndex[Math.floor(Math.random() * 3)]
-    computerStatusImage.style.backgroundImage = computerImages[computerStatus];
-    if (currentGame === 'mukChiPa' && currentWinner === 'computer') {
-        thirdSignal.innerHTML = rockScissorsPaperKoran[computerStatus] + '!!'
-    }
-}
-
-const currentWinnerUser = async (ms) => {
-    userRock.disabled = false;
-    userScissors.disabled = false;
-    userPaper.disabled = false;
-    await delay(ms);
-    userRock.disabled = true;
-    userScissors.disabled = true;
-    userPaper.disabled = true;
-    setComputerStatus();
-    await delay(term);
-}
-
-const currentWinnerComputer = async (ms) => {
-    delay(ms - term, () => {
-        userRock.disabled = false;
-        userScissors.disabled = false;
-        userPaper.disabled = false;
-    })
-    delay(ms + term, () => {
-        userRock.disabled = true;
-        userScissors.disabled = true;
-        userPaper.disabled = true;
-    })
+const 유저가이기고있을때규칙 = async (ms) => {
+    setUserSelectionButtonDisabled(false)
     await delay(ms);
     setComputerStatus();
-    await delay(term);
 }
 
-const result = (type) => {
-    signalWrap.style.display = 'none'
-    startBtnWrap.style.display = 'block'
-    startBtnWrap.firstElementChild.innerHTML = 'TRY AGAIN?'
-    userSelectionWrap.style.display = 'none';
-    resultWrap.style.display = 'flex'
-    resultWrap.firstElementChild.className = type
+const 컴퓨터가이기고있을때규칙 = async (ms) => {
+    await delay(ms - term, () => setUserSelectionButtonDisabled(false))
+    await delay(term, setComputerStatus)
 }
 
-const gameLogic = () => {
+const mukChiPaRule = () => {
     const rockScissorsPaperObject = {
         rock: {
             rock: null,
@@ -210,7 +181,6 @@ const gameLogic = () => {
             if (nextWinner === 'computer') {
                 firstSignal.innerHTML = rockScissorsPaperKoran[computerStatus]
                 secondSignal.innerHTML = rockScissorsPaperKoran[computerStatus]
-                thirdSignal.innerHTML = rockScissorsPaperKoran[computerStatus] + '!!'
             } else {
                 firstSignal.innerHTML = rockScissorsPaperKoran[userStatus]
                 secondSignal.innerHTML = rockScissorsPaperKoran[userStatus]
@@ -235,7 +205,6 @@ const gameLogic = () => {
             if (nextWinner === 'computer') {
                 firstSignal.innerHTML = rockScissorsPaperKoran[computerStatus]
                 secondSignal.innerHTML = rockScissorsPaperKoran[computerStatus]
-                thirdSignal.innerHTML = rockScissorsPaperKoran[computerStatus] + '!!'
             } else {
                 firstSignal.innerHTML = rockScissorsPaperKoran[userStatus]
                 secondSignal.innerHTML = rockScissorsPaperKoran[userStatus]
@@ -244,3 +213,38 @@ const gameLogic = () => {
         }
     }
 }
+
+const setUserSelectionButtonDisabled = (boolean) => {
+    userRock.disabled = boolean;
+    userScissors.disabled = boolean;
+    userPaper.disabled = boolean;
+}
+
+const setUserStatus = (selection) => {
+    userStatus = selection
+    userStatusImage.style.backgroundImage = userImages[selection];
+    setThirdSignalInnerHtml(userStatus,'user');
+}
+
+const setComputerStatus = () => {
+    computerStatus = rockScissorsPaperIndex[Math.floor(Math.random() * 3)]
+    computerStatusImage.style.backgroundImage = computerImages[computerStatus];
+    setThirdSignalInnerHtml(computerStatus,'computer');
+}
+
+const setThirdSignalInnerHtml = (status, type) => {
+    if (currentGame === 'mukChiPa' && currentWinner === type) {
+        thirdSignal.innerHTML = rockScissorsPaperKoran[status] + '!!'
+    }
+}
+
+const handleLoadWindow = () => {
+    document.querySelector(".document-wrap").style.display = 'flex'
+}
+
+const handleClickDocumentWrap = () => {
+    document.querySelector(".document-wrap").style.display = 'none'
+}
+
+window.addEventListener("load", handleLoadWindow)
+window.removeEventListener("unload", handleLoadWindow)
