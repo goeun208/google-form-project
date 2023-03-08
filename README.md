@@ -2,12 +2,12 @@
 
 ### simple intern project (bare minimum prjoject)
 
-- [to_do_list_vanila](https://github.com/mobiliverse-inc/intern-project/tree/main/to_do_list_vanila/reference)
-- [to_do_list_react](https://github.com/mobiliverse-inc/intern-project/tree/main/to_do_list_react/reference)
+- [to_do_list_vanila](https://github.com/mobiliverse-inc/intern-project/tree/main/to_do_list_vanila)
+- [to_do_list_react](https://github.com/mobiliverse-inc/intern-project/tree/main/to_do_list_react)
 
 ### optional intern project (advanced project)
 
-- [muk_chi_pa](https://github.com/mobiliverse-inc/intern-project/tree/main/muk_chi_pa/reference)
+- [muk_chi_pa](https://github.com/mobiliverse-inc/intern-project/tree/main/muk_chi_pa)
 
 ### optional intern project (nightmare project)
 
