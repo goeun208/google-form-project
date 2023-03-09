@@ -59,7 +59,7 @@ const startRound = async () => {
 }
 
 const fight = async () => {
-    currentWinner === 'user' ? await 유저가이기고있을때규칙(3000) : await 컴퓨터가이기고있을때규칙(2000)
+    currentWinner === 'user' ? await 유저가이기고있을때규칙() : await 컴퓨터가이기고있을때규칙()
     await delay(term);
     mukChiPaRule();
     decideWinner();
@@ -144,13 +144,12 @@ const setSignal = () => {
     }, 20);
 }
 
-const 유저가이기고있을때규칙 = async (ms) => {
+const 유저가이기고있을때규칙 = async (ms = 유저가이기고있을때라운드시간) => {
     setUserSelectionButtonDisabled(false)
-    await delay(ms);
-    setComputerStatus();
+    await delay(ms, setComputerStatus);
 }
 
-const 컴퓨터가이기고있을때규칙 = async (ms) => {
+const 컴퓨터가이기고있을때규칙 = async (ms = 컴퓨터가이기고있을때라운드시간) => {
     await delay(ms - term, () => setUserSelectionButtonDisabled(false))
     await delay(term, setComputerStatus)
 }
