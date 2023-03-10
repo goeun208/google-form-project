@@ -18,3 +18,5 @@
 - [깃허브 명령어](https://github.com/mobiliverse-inc/intern-project/blob/main/development_note/Github.md)
 
 - [변수선언(var, let, const)](https://github.com/mobiliverse-inc/intern-project/blob/main/development_note/var_let_const.md)
+
+- [type_of_next_rendering](https://github.com/mobiliverse-inc/intern-project/tree/main/type_of_next_rendering)
