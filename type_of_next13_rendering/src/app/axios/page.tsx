@@ -1,7 +1,6 @@
 'use client';
 
 import React, { use, useEffect, useState } from 'react';
-import styled from 'styled-components';
 import { headers } from '../_type/tableType';
 import axios from 'axios';
 import {
@@ -96,7 +95,11 @@ const Axios = () => {
         ) : (
           <tbody>
             <tr>
-              <td colSpan={4} align="center">
+              <td
+                colSpan={4}
+                align="center"
+                style={{ background: '#fff', color: '#000' }}
+              >
                 loading..
               </td>
             </tr>

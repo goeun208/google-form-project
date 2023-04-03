@@ -9,8 +9,8 @@ import {
   TableData,
   DateTimeText,
 } from '../styled';
-import useSWR from 'swr';
-import { DateTimeProps, fetchDataProps } from '../type';
+import useSWR, { SWRConfig } from 'swr';
+import { DateTimeProps, fetchDataProps } from '../_type/fetchType';
 
 const fetcher = (url: string) =>
   // cache: 'no-store' - 모든 요청에서 최신 데이터 받아오기(getServerSideProps 와 유사)
@@ -19,32 +19,29 @@ const fetcher = (url: string) =>
     .then((response) => response.json())
     .catch((e) => console.log(e));
 
-// SSR(Server-Side Rendering)
-const Ssr = () => {
+const SsrTable = () => {
   const {
     data: ssrData,
     error: ssrError,
     isLoading: ssrLoading,
   } = useSWR<fetchDataProps | any>(
-    `https://jsonplaceholder.typicode.com/users`,
-    fetcher
+    `https://jsonplaceholder.typicode.com/users`
   );
 
   const {
     data: dateData,
     error: dateError,
     isLoading: dateLoading,
-  } = useSWR<DateTimeProps | any>(`https://worldtimeapi.org/api/ip`, fetcher);
+  } = useSWR<DateTimeProps | any>(`https://worldtimeapi.org/api/ip`);
   const dateTime = dateData?.datetime;
   const dateFormat = dateTime?.substring(0, 19);
 
+  if (ssrData === undefined) return null;
+  if (dateData === undefined) return null;
+
   return (
     <>
-      {!ssrLoading && !dateLoading ? (
-        <Title>SSR 방식으로 렌더링 되는 중..</Title>
-      ) : (
-        <Title>loading..</Title>
-      )}
+      <Title>SSR 방식으로 렌더링 되는 중..</Title>
       <TableWrapper>
         <TableHead>
           <tr>
@@ -53,9 +50,9 @@ const Ssr = () => {
             })}
           </tr>
         </TableHead>
-        {!ssrLoading ? (
+        {ssrData && (
           <tbody>
-            {ssrData.map((r: any, idx: number) => {
+            {ssrData?.map((r: any, idx: number) => {
               return (
                 <tr key={idx}>
                   <TableData align>{r?.id}</TableData>
@@ -66,21 +63,20 @@ const Ssr = () => {
               );
             })}
           </tbody>
-        ) : (
-          <tbody>
-            <tr>
-              <td colSpan={4} align="center">
-                loading..
-              </td>
-            </tr>
-          </tbody>
         )}
       </TableWrapper>
-      {!dateLoading ? (
-        <DateTimeText>{dateFormat}</DateTimeText>
-      ) : (
-        <DateTimeText>loading..</DateTimeText>
-      )}
+      <DateTimeText>{dateFormat}</DateTimeText>
+    </>
+  );
+};
+
+// SSR(Server-Side Rendering)
+const Ssr = () => {
+  return (
+    <>
+      <SWRConfig value={{ fetcher }}>
+        <SsrTable />
+      </SWRConfig>
     </>
   );
 };
