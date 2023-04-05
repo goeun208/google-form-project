@@ -106,7 +106,7 @@ function App() {
                         iconName="DescriptionIcon"
                         toolTipLabel="설문지 홈"
                         buttonSize="large"
-                        className="text-[#673ab7]"
+                        className="text-[#673ab8]"
                     />
                     <div className="flex items-center flex-grow ml-1">
                         <UnderlineInput
