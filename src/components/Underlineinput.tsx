@@ -33,7 +33,7 @@ const UnderlineInput = ({
     return (
         <div className={`relative py-1 ${containerClassName}`}>
             <input type="text" placeholder={placeHolder} className={`peer/input w-full ${inputClassName}`}
-            value={value}
+            value={value || "" }
             onChange={(e) => {
                 handleInputChange(e);
             }}

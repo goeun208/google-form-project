@@ -2,6 +2,9 @@ import { ReactElement, useEffect, useState } from "react";
 import RadioButtonCheckedIcon from "@mui/icons-material/RadioButtonChecked";
 import CheckBoxOutlinedIcon from "@mui/icons-material/CheckBoxOutlined";
 import ArrowDropDownCircleOutlinedIcon from "@mui/icons-material/ArrowDropDownCircleOutlined";
+import { useRecoilState } from "recoil";
+import { dropMenuId } from "../atoms/dropMenuId";
+import { useController, useForm } from "react-hook-form";
 
 interface DropDownItemType {
     id: string;
@@ -9,13 +12,19 @@ interface DropDownItemType {
     icon: ReactElement;
 }
 
-const DropdownMenu = () => {
-    const [view, setView] = useState<boolean>(false); // 숨겼다가 펼치는 메뉴
-    const [menu, setMenu] = useState<string>('radio');
+const DropdownMenu = ({control, name}:any) => {
+    const [menu, setMenu] = useRecoilState<string>(dropMenuId);
+    const [isOpen, setIsOpen] = useState<boolean>(false);
+    const {
+        field: { value, onChange },
+    } = useController({
+        control,
+        name,
+    });
 
     useEffect(() => {
-        console.log('menu', menu);
-    }, [menu]);
+        console.log('name', name);
+    }, []);
 
     const dropDownItems: DropDownItemType[] = [
         {
@@ -41,16 +50,33 @@ const DropdownMenu = () => {
     return (
         <div>
             <label className="text-sm"></label>
-            <ul className="text-sm text-center h-[3rem] border-[#000] overflow-auto">
+            { isOpen ?  <ul className="text-sm text-center h-[3rem]">
                 {
                     dropDownItems.map((item:DropDownItemType, idx:number) => (
-                        <li key={idx} onClick={() => setMenu(item.id)} className="border flex items-center w-[12rem] h-[3rem] text-center hover:bg-[#eee]">
+                        <li key={idx} onClick={() => (
+                                setIsOpen(!isOpen),
+                                onChange(item.id)
+                            )} className="border flex items-center w-[12rem] h-[3rem] text-center hover:bg-[#eee]">
                             <span className="mx-2">{item.icon}</span>
                             <span >{item.label}</span>
                         </li>
                     ))
                 }
             </ul>
+            :
+            <ul className="text-sm text-center h-[3rem] overflow-hidden">
+                {
+                    dropDownItems.map((item:DropDownItemType, idx:number) => (
+                        <li key={idx} onClick={() => (
+                                setIsOpen(!isOpen),
+                                onChange(item.id)
+                            )} className="border flex items-center w-[12rem] h-[3rem] text-center hover:bg-[#eee]">
+                            <span className="mx-2">{item.icon}</span>
+                            <span >{item.label}</span>
+                        </li>
+                    ))
+                }
+            </ul> }
         </div>
     );
 }
