@@ -9,8 +9,11 @@ import UTurnLeftOutlinedIcon from '@mui/icons-material/UTurnLeftOutlined';
 import UTurnRightOutlinedIcon from '@mui/icons-material/UTurnRightOutlined';
 import UnderlineInput from './Underlineinput';
 import { IconButton } from '@mui/material';
+import { useEffect, useState } from 'react';
 
 const Header = ({control}:any) => {
+    const [currentPage, setCurrentPage] = useState<string>('question');
+
     return (
         <header className="w-full bg-white border-b">
             <div className="flex justify-between items-center">
@@ -53,8 +56,15 @@ const Header = ({control}:any) => {
             </div>
             <div>
                 <div className="w-[48rem] h-9 flex justify-center items-center my-0 mx-auto">
-                    <button className="px-3 text-sm font-medium cursor-pointer h-full flex items-center relative">질문</button>
-                    <button className="px-3 text-sm font-medium cursor-pointer h-full flex items-center">응답</button>
+                    <button type="button" className="px-3 text-sm font-medium cursor-pointer h-full flex items-center justify-center relative" onClick={() => (setCurrentPage('question'))}>
+                        질문
+                       {currentPage === 'question' && <div className="absolute bottom-0 w-full h-[3px] bg-[#4c2b87] rounded-t-[3px]"></div> }
+                    </button>
+                    <button type="button" className="px-3 text-sm font-medium cursor-pointer h-full flex items-center justify-center relative" onClick={() => (setCurrentPage('response'))}>
+                        응답
+                        {currentPage === 'response' && <div className="absolute bottom-0 w-full h-[3px] bg-[#4c2b87] rounded-t-[3px]"></div> }
+                    </button>
+
                 </div>
             </div>
         </header>

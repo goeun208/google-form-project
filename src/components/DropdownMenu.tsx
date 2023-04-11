@@ -1,10 +1,8 @@
-import { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useState } from "react";
 import RadioButtonCheckedIcon from "@mui/icons-material/RadioButtonChecked";
 import CheckBoxOutlinedIcon from "@mui/icons-material/CheckBoxOutlined";
 import ArrowDropDownCircleOutlinedIcon from "@mui/icons-material/ArrowDropDownCircleOutlined";
-import { useRecoilState } from "recoil";
-import { dropMenuId } from "../atoms/dropMenuId";
-import { useController, useForm } from "react-hook-form";
+import { useController} from "react-hook-form";
 
 interface DropDownItemType {
     id: string;
@@ -13,18 +11,18 @@ interface DropDownItemType {
 }
 
 const DropdownMenu = ({control, name}:any) => {
-    const [menu, setMenu] = useRecoilState<string>(dropMenuId);
     const [isOpen, setIsOpen] = useState<boolean>(false);
+    const [menu, setMenu] = useState<any>([{
+        id: "radio",
+        label: "객관식 질문",
+        icon: <RadioButtonCheckedIcon className="text-zinc-600" />,
+    }]);
     const {
         field: { value, onChange },
     } = useController({
         control,
         name,
     });
-
-    useEffect(() => {
-        console.log('name', name);
-    }, []);
 
     const dropDownItems: DropDownItemType[] = [
         {
@@ -44,39 +42,51 @@ const DropdownMenu = ({control, name}:any) => {
         },
     ];
 
-    // const selectDropDownMenu = () => {
-    //     setMenu(dropDownItems.find((dropDownItem) => dropDownItem.id === menu));
-    // }
+    const selectDropdownMenu = (item:DropDownItemType) => {
+        setMenu(dropDownItems.filter((dropdownItem) => dropdownItem.id === item.id))
+    }
+
+    const handleChange = () => {
+        setIsOpen(!isOpen)
+      };
     return (
         <div>
-            <label className="text-sm"></label>
-            { isOpen ?  <ul className="text-sm text-center h-[3rem]">
+            { isOpen ?  
+            <div className="ml-2 shadow-lg absolute -top-6 right-[15rem] rounded-[4px]">
+                <div className="text-sm text-center w-[13rem] h-[3rem] absolute top-0" onClick={handleChange}>
                 {
                     dropDownItems.map((item:DropDownItemType, idx:number) => (
-                        <li key={idx} onClick={() => (
-                                setIsOpen(!isOpen),
+                        <div key={idx} onClick={() => (
+                                selectDropdownMenu(item),
                                 onChange(item.id)
-                            )} className="border flex items-center w-[12rem] h-[3rem] text-center hover:bg-[#eee]">
-                            <span className="mx-2">{item.icon}</span>
+                            )} className="flex items-center h-[3rem] text-center hover:bg-[#eee] border bg-white">
+                            <span className="mx-3">{item.icon}</span>
                             <span >{item.label}</span>
-                        </li>
+                        </div>
                     ))
                 }
-            </ul>
+            </div>
+            </div>
+            
             :
-            <ul className="text-sm text-center h-[3rem] overflow-hidden">
-                {
-                    dropDownItems.map((item:DropDownItemType, idx:number) => (
-                        <li key={idx} onClick={() => (
-                                setIsOpen(!isOpen),
-                                onChange(item.id)
-                            )} className="border flex items-center w-[12rem] h-[3rem] text-center hover:bg-[#eee]">
-                            <span className="mx-2">{item.icon}</span>
-                            <span >{item.label}</span>
-                        </li>
-                    ))
-                }
-            </ul> }
+            <div className="text-sm text-center w-[13rem] h-[3rem] border overflow-hidden flex items-center h-[3rem] hover:bg-[#eee] rounded-[4px]" onClick={handleChange}>
+                <span className="mx-3">{menu[0].icon}</span>
+                <span >{menu[0].label}</span>
+            </div>
+            // <ul className="text-sm text-center w-[13rem] h-[3rem] overflow-hidden">
+            //     {
+            //         dropDownItems.map((item:DropDownItemType, idx:number) => (
+            //             <li key={idx} onClick={() => (
+            //                     setIsOpen(!isOpen),
+            //                     onChange(item.id)
+            //                 )} className="border flex items-center h-[3rem] text-center hover:bg-[#eee]">
+            //                 <span className="mx-3">{item.icon}</span>
+            //                 <span >{item.label}</span>
+            //             </li>
+            //         ))
+            //     }
+            // </ul> 
+            }
         </div>
     );
 }
