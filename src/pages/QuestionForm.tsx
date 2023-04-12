@@ -1,14 +1,14 @@
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import QuestionContainer from '../components/QuestionContainer';
 import UnderlineInput from '../components/Underlineinput';
 import { useFieldArray, useForm } from 'react-hook-form';
 import Header from '../components/Header';
 
-interface option {
-    optionTitle?: string;
+interface optionForm {
+    id?: string;
+    optionTitle: string;
 }
-
 
 interface CardType {
     type: string
@@ -24,7 +24,8 @@ export interface FormType {
 }
 
 const QuestionForm = () => {
-    const {control, handleSubmit, setValue, getValues} = useForm<FormType>({
+    const [active, setActive] = useState<number | null>(null);
+    const {control, handleSubmit} = useForm<FormType>({
         defaultValues: {
             formTitle: "제목 없는 설문지",
             formDescription: "",
@@ -32,7 +33,9 @@ const QuestionForm = () => {
                 {
                     type: "radio",
                     question: "질문",
-                    options: ["옵션"],
+                    options: [{
+                        optionTitle: "옵션"
+                    }],
                     required: false,
                 }
             ],
@@ -40,35 +43,31 @@ const QuestionForm = () => {
         mode: "onChange"
     });
 
-    const {fields, append}
+    const {fields, append, insert, remove}
     = useFieldArray({
         control,
         name: 'questionCardList'
-    })
-
-    const addOptionTitle = (e: any) => {
-        
-    }
-
+    });
     const onSubmit = (data: FormType) => console.log('data',data);
-    const [qnaForms, setQnaForms] = useState<Array<any>>([]);
-    const [active, setActive] = useState<number | null>(null);
 
-    const handleQuestionForm = () => {
-        const ex = {
-            title: "",
-            isFocus: true,
-        }
-        setQnaForms(qnaForms => qnaForms.concat(ex));
-    }
-    
     const insertQuestionCard = () => {
-        setValue('questionCardList', [...getValues('questionCardList'), {type: "radio", question: "질문", options: ["옵션"], required: false}])
+        append({type: "radio", question: "질문", options: [{
+                        optionTitle: "옵션"
+                }], required: false});
+    }
+
+    const copyQuestionCard = (index:number) => {
+        insert(index + 1, fields[index]);
+    }
+
+    const deleteQuestionCard = (index:number) => {
+        remove(index);
     }
 
     useEffect(() => {
-        console.log('question fields', fields);
+        console.log(fields);
     }, [fields]);
+
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
            <Header control={control} handleSubmit={handleSubmit}/>
@@ -90,18 +89,20 @@ const QuestionForm = () => {
                     control={control}
                     name="formDescription"
                 />
-                {/* <button className="rounded-md w-10 h-10 bg-white shadow-sm shadow-[#999] absolute top-3 -right-12" onClick={handleQuestionForm}> */}
-                <button className="rounded-md w-10 h-10 bg-white shadow-sm shadow-[#999] absolute top-3 -right-12" onClick={insertQuestionCard}> 
+                <button type="button" className="rounded-md w-10 h-10 bg-white shadow-sm shadow-[#999] absolute top-3 -right-12" onClick={insertQuestionCard}> 
                     <ControlPointIcon />
                 </button>
             </div>
             <div >
-                {/* {qnaForms.map((item, idx) => (
-                    <QuestionContainer idx={idx} control={control} active={active} setActive={setActive} key={idx} />
-                ))} */}
                 { fields && fields.map((field, idx) => (
-                    <QuestionContainer idx={idx} control={control} active={active} setActive={setActive} key={field.id} />))
-                }
+                    <QuestionContainer 
+                        idx={idx} 
+                        control={control} 
+                        active={active} setActive={setActive} 
+                        key={field.id} 
+                        deleteQuestionCard={deleteQuestionCard} 
+                        copyQuestionCard={copyQuestionCard} />  
+                ))}
             </div>
         </div>
         </form>
