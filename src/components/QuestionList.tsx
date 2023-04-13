@@ -65,7 +65,7 @@ const QuestionList = ({ control, name, idx }: any) => {
 
                     <input placeholder="옵션" key={field.id} {...register(`${value}.options.${index}.optionTitle`)}
                         onKeyDown={(e: any) => (e.keyCode === 13 && insertOption(index, e.target.value))}
-                        className="ml-2 w-4/5 outline-none hover:border-b placeholder:text-black focus:border-[#673ab7] py-1" />
+                        className="ml-2 w-4/5 outline-none hover:border-b placeholder:text-black focus:border-b focus:border-[#673ab7] py-1 z-0 transition duration-0 ease-out hover:duration-150" />
                     <div className="absolute right-8" onClick={() => (deleteOption(index))}>
                         <IconButton>
                             <CloseIcon color="action"/>

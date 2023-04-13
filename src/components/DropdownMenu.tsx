@@ -52,7 +52,7 @@ const DropdownMenu = ({control, name}:any) => {
     return (
         <div>
             { isOpen ?  
-            <div className="ml-2 shadow-lg absolute -top-6 right-[15rem] rounded-[4px]">
+            <div className="ml-2 shadow-lg absolute -top-6 right-[15rem] rounded-[4px] z-10">
                 <div className="text-sm text-center w-[13rem] h-[3rem] absolute top-0" onClick={handleChange}>
                 {
                     dropDownItems.map((item:DropDownItemType, idx:number) => (
