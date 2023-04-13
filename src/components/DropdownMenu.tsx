@@ -1,8 +1,8 @@
-import { ReactElement, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import RadioButtonCheckedIcon from "@mui/icons-material/RadioButtonChecked";
 import CheckBoxOutlinedIcon from "@mui/icons-material/CheckBoxOutlined";
 import ArrowDropDownCircleOutlinedIcon from "@mui/icons-material/ArrowDropDownCircleOutlined";
-import { useController} from "react-hook-form";
+import { useController } from "react-hook-form";
 
 interface DropDownItemType {
     id: string;
@@ -10,7 +10,7 @@ interface DropDownItemType {
     icon: ReactElement;
 }
 
-const DropdownMenu = ({control, name}:any) => {
+const DropdownMenu = ({ control, name }: any) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [menu, setMenu] = useState<any>([{
         id: "radio",
@@ -42,50 +42,54 @@ const DropdownMenu = ({control, name}:any) => {
         },
     ];
 
-    const selectDropdownMenu = (item:DropDownItemType) => {
-        setMenu(dropDownItems.filter((dropdownItem) => dropdownItem.id === item.id))
+    const selectDropdownMenu = (item: DropDownItemType) => {
+        setMenu(dropDownItems.filter((dropdownItem) => dropdownItem.id === value))
     }
 
     const handleChange = () => {
         setIsOpen(!isOpen)
-      };
+    };
+
+    useEffect(() => {
+        console.log('drop value====>', value);
+    }, [value]);
+
     return (
         <div>
-            { isOpen ?  
-            <div className="ml-2 shadow-lg absolute -top-6 right-[15rem] rounded-[4px] z-10">
-                <div className="text-sm text-center w-[13rem] h-[3rem] absolute top-0" onClick={handleChange}>
-                {
-                    dropDownItems.map((item:DropDownItemType, idx:number) => (
-                        <div key={idx} onClick={() => (
-                                selectDropdownMenu(item),
-                                onChange(item.id)
-                            )} className="flex items-center h-[3rem] text-center hover:bg-[#eee] border bg-white">
-                            <span className="mx-3">{item.icon}</span>
-                            <span >{item.label}</span>
-                        </div>
-                    ))
-                }
-            </div>
-            </div>
-            
-            :
-            <div className="text-sm text-center w-[13rem] h-[3rem] border overflow-hidden flex items-center h-[3rem] hover:bg-[#eee] rounded-[4px]" onClick={handleChange}>
-                <span className="mx-3">{menu[0].icon}</span>
-                <span >{menu[0].label}</span>
-            </div>
-            // <ul className="text-sm text-center w-[13rem] h-[3rem] overflow-hidden">
-            //     {
-            //         dropDownItems.map((item:DropDownItemType, idx:number) => (
-            //             <li key={idx} onClick={() => (
-            //                     setIsOpen(!isOpen),
-            //                     onChange(item.id)
-            //                 )} className="border flex items-center h-[3rem] text-center hover:bg-[#eee]">
-            //                 <span className="mx-3">{item.icon}</span>
-            //                 <span >{item.label}</span>
-            //             </li>
-            //         ))
-            //     }
-            // </ul> 
+            {isOpen ?
+                <div className="ml-2 shadow-lg absolute -top-6 right-[15rem] rounded-[4px] z-10">
+                    <div className="text-sm text-center w-[13rem] h-[3rem] absolute top-0" onClick={handleChange}>
+                        {
+                            dropDownItems.map((item: DropDownItemType, idx: number) => (
+                                <div key={idx} onClick={() => (
+                                    selectDropdownMenu(item),
+                                    onChange(item.id)
+                                )} className="flex items-center h-[3rem] text-center hover:bg-[#eee] border bg-white">
+                                    <span className="mx-3">{item.icon}</span>
+                                    <span >{item.label}</span>
+                                </div>
+                            ))
+                        }
+                    </div>
+                </div>
+
+                :
+
+                value === "radio" ? (
+                    <div className="text-sm text-center w-[13rem] h-[3rem] border overflow-hidden flex items-center h-[3rem] hover:bg-[#eee] rounded-[4px]" onClick={handleChange}>
+                        <span className="mx-3">{dropDownItems[0].icon}</span>
+                        <span >{dropDownItems[0].label}</span>
+                    </div>)
+                    : value === "checkbox" ? (
+                        <div className="text-sm text-center w-[13rem] h-[3rem] border overflow-hidden flex items-center h-[3rem] hover:bg-[#eee] rounded-[4px]" onClick={handleChange}>
+                            <span className="mx-3">{dropDownItems[1].icon}</span>
+                            <span >{dropDownItems[1].label}</span>
+                        </div>)
+                        : value === "dropdown" && (
+                            <div className="text-sm text-center w-[13rem] h-[3rem] border overflow-hidden flex items-center h-[3rem] hover:bg-[#eee] rounded-[4px]" onClick={handleChange}>
+                                <span className="mx-3">{dropDownItems[2].icon}</span>
+                                <span >{dropDownItems[2].label}</span>
+                            </div>)
             }
         </div>
     );

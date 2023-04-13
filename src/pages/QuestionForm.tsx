@@ -34,7 +34,7 @@ const QuestionForm = () => {
                     type: "radio",
                     question: "질문",
                     options: [{
-                        optionTitle: "옵션"
+                        
                     }],
                     required: false,
                 }
@@ -78,13 +78,13 @@ const QuestionForm = () => {
                 <div className="h-full w-1.5 bg-[#4285f4] absolute top-0 left-0 rounded-tl-lg rounded-bl-lg z-0"></div>
                 <UnderlineInput
                     containerClassName="xs:inline-block text-[2rem] mx-7 mt-5 w-[92%] flex peer/underline-input"
-                    inputClassName="leading-10 pb-2 focus:border-b-2 focus:border-[#673ab7] border-b-[1px] outline-none"
+                    inputClassName="leading-10 outline-none"
                     control={control} 
                     name="formTitle"
                 />
                 <UnderlineInput
                     containerClassName="xs:inline-block text-sm mx-7 mt-1 w-[92%]"
-                    inputClassName="py-1 focus:border-b-2 focus:border-[#673ab7] border-b-[1px] outline-none"
+                    inputClassName="pt-1 outline-none"
                     placeHolder="설문지 설명"
                     control={control}
                     name="formDescription"

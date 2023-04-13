@@ -23,7 +23,7 @@ const Header = ({control}:any) => {
                     </div>
                     <div className="pr-1.5 cursor-pointer rounded-full">
                         <UnderlineInput
-                            containerClassName="xs:inline-block w-[8rem] text-[1.25rem] text-black"
+                            containerClassName="xs:inline-block w-[10rem] text-[1.25rem] text-black"
                             inputClassName="focus:border-b-2 focus:border-[#673ab7] outline-none"
                             underlineColor="#000"
                             placeHolder="제목 없는 설문지"

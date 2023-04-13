@@ -32,7 +32,7 @@ const UnderlineInput = ({
     });
     return (
         <div className={`relative py-1 ${containerClassName}`}>
-            <input type="text" placeholder={placeHolder} className={`peer/input w-full ${inputClassName}`}
+            <input type="text" placeholder={placeHolder} className={`w-full peer ${inputClassName}`}
             value={value || "" }
             onChange={(e) => {
                 handleInputChange(e);
@@ -53,6 +53,7 @@ const UnderlineInput = ({
                 }
             }}
             />
+            <div className="absolute w-full bottom-0 peer-focus:animate-bdbottom peer-focus:border-b-2 peer-focus:border-[#673ab7] peer-hover:border-b"></div>
         </div>
     );
 };
