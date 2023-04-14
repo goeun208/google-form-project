@@ -12,19 +12,22 @@ import UnderlineInput from './Underlineinput';
 import DropdownMenu from './DropdownMenu';
 import QuestionList from './QuestionList';
 import { useEffect, useState } from 'react';
+import { CardType } from '../pages/QuestionForm';
 
 const label = { inputProps: { 'aria-label': 'Switch demo' } };
 
 interface QuestionCardPageProps {
+    register: any;
     idx: number;
     control: any;
     active: number | null;
     setActive: any;
-    copyQuestionCard: (index: number) => void;
+    copyQuestionCard: (index: number, card: CardType) => void;
     deleteQuestionCard: (index: number) => void;
 }
 
 const QuestionContainer = ({
+    register,
     idx,
     control,
     active,
@@ -63,7 +66,6 @@ const QuestionContainer = ({
 
     useEffect(() => {
         console.log('value', value);
-         console.log('name', `${name}.required`);
     }, [value]);
 
     useEffect(() => {
@@ -139,11 +141,11 @@ const QuestionContainer = ({
                 <DropdownMenu control={control} name={`${name}.type`} />
             </div>
             {/* 질문 리스트 */}
-            <QuestionList control={control} name={`${name}`} />
+            <QuestionList control={control} name={`${name}`} register={register} />
             {/* 하단 아이콘 */}
             <div className='relative h-[4rem]'>
                 <div className="w-11/12 h-full pr-4 text-right border-t border-gray-300 absolute bottom-0 left-8 rounded-b-lg flex items-center justify-end">
-                    <IconButton size="large" onClick={() => (copyQuestionCard(idx))}>
+                    <IconButton size="large" onClick={() => (copyQuestionCard(idx,value))}>
                         <ContentCopyIcon color="action" />
                     </IconButton>
                     <IconButton aria-label="delete" size="large" onClick={() => (deleteQuestionCard(idx))}>

@@ -10,7 +10,7 @@ import Header from '../components/Header';
 //     optionTitle: string;
 // }
 
-interface CardType {
+export interface CardType {
     type: string
     question: string;
     options: any;
@@ -25,7 +25,7 @@ export interface FormType {
 
 const QuestionForm = () => {
     const [active, setActive] = useState<number | null>(null);
-    const {control, handleSubmit, watch} = useForm<FormType>({
+    const {register, control, handleSubmit, watch} = useForm<FormType>({
         defaultValues: {
             formTitle: "제목 없는 설문지",
             formDescription: "",
@@ -34,7 +34,7 @@ const QuestionForm = () => {
                     type: "radio",
                     question: "질문",
                     options: [{
-                        optionTitle: ""
+                        optionTitle: "옵션옵션"
                     }],
                     required: false,
                 }
@@ -56,8 +56,9 @@ const QuestionForm = () => {
         }], required: false});
     }
 
-    const copyQuestionCard = (index:number) => {
-        insert(index + 1, fields[index]);
+    const copyQuestionCard = (index:number, card: any) => {
+        // insert(index + 1, fields[index]);
+        insert(index + 1, JSON.parse(JSON.stringify(card)))
     }
 
     const deleteQuestionCard = (index:number) => {
@@ -65,7 +66,7 @@ const QuestionForm = () => {
     }
 
     useEffect(() => {
-
+        // console.log(watch());
     }, [watch()]);
 
     return (
@@ -95,7 +96,8 @@ const QuestionForm = () => {
             </div>
             <div >
                 { fields && fields.map((field, idx) => (
-                    <QuestionContainer 
+                    <QuestionContainer
+                        register={register} 
                         idx={idx} 
                         control={control} 
                         active={active} setActive={setActive} 

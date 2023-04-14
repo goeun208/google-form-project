@@ -7,15 +7,23 @@ import { useEffect } from "react";
 import IconButton from "./IconButton";
 
 // 배열 쓰기
-const QuestionList = ({ control, name, idx }: any) => {
-    const { register } = useForm();
+const QuestionList = ({ control, name, register }: any) => {
+    // const {watch, getValues, setValue } = useForm();
 
     const {
-        field: { value }
+        field: { value, onChange: handleInputChange }
     } = useController({
         control,
         name
     })
+
+    // const {
+    //     field: { onChange: handleInputChange }
+    // } = useController({
+    //     control,
+    //     name: `${name}.options[index].optionTitle`
+    // })
+
 
     const {
         fields, insert, remove
@@ -29,7 +37,7 @@ const QuestionList = ({ control, name, idx }: any) => {
     }, [fields]);
 
     useEffect(() => {
-        console.log('drop type', value.type);
+        console.log('drop value ===> ', value);
     }, [value]);
 
     // const handleList = (option: string) => {
@@ -40,18 +48,24 @@ const QuestionList = ({ control, name, idx }: any) => {
     //     setOption('');
     // }
 
-    const insertOption = (index: number, e: any) => {
-        insert(index, { optionTitle: e });
+    const insertOption = (index: number) => {
+        // setValue(`${name}.options.${index}.optionTitle`, e)
+        insert(index - 1, {optionTitle: ""});
     }
 
     const deleteOption = (index: number) => {
         index !== 0 && remove(index);
     }
 
+    
+    // useEffect(() => {
+    //     console.log('register watch ====>', watch())
+    // }, [watch()]);
+
     return (
         <div className="w-full pl-7">
             {value && fields && fields.map((field, index) => (
-                <div className="h-[3rem] flex items-center text-sm mb-1" key={field.id}>
+                <div className="h-[3rem] flex items-center text-sm mb-1 ml-1" key={field.id}>
                     {
                         value.type === "radio" && <RadioButtonUncheckedRoundedIcon color="disabled" />
                     }
@@ -62,9 +76,16 @@ const QuestionList = ({ control, name, idx }: any) => {
                         value.type === "dropdown" && <span>{index + 1}</span>
                     }
                     <div className="w-4/5 relative">
-                        <input placeholder="옵션" key={field.id} {...register(`${value}.options.${index}.optionTitle`)}
-                        onKeyDown={(e: any) => (e.keyCode === 13 && insertOption(index, e.target.value))}
-                        className=" ml-2 w-full outline-none placeholder:text-black py-1 z-0 peer" />
+                        <input key={field.id}
+                            value={value.options[index].optionTitle}
+                            onChange={(e) => {
+                                handleInputChange(e);
+                            }}
+                            onFocus={(e) => {
+                                e.currentTarget.select();
+                            }}
+                            onKeyDown={(e: any) => (e.keyCode === 13 && insertOption(index))}
+                            className=" ml-2 w-full outline-none placeholder:text-black py-1 z-0 peer" />
                         <div className="absolute w-full bottom-0 ml-2 peer-focus:animate-bdbottom peer-focus:border-b-2 peer-focus:border-[#4c2b87] peer-hover:border-b"></div>
                     </div>
                     <div className="absolute right-[4.5rem]">
