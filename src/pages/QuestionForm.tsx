@@ -5,10 +5,10 @@ import UnderlineInput from '../components/Underlineinput';
 import { useFieldArray, useForm } from 'react-hook-form';
 import Header from '../components/Header';
 
-interface optionForm {
-    id?: string;
-    optionTitle: string;
-}
+// interface optionForm {
+//     id?: string;
+//     optionTitle: string;
+// }
 
 interface CardType {
     type: string
@@ -25,7 +25,7 @@ export interface FormType {
 
 const QuestionForm = () => {
     const [active, setActive] = useState<number | null>(null);
-    const {control, handleSubmit} = useForm<FormType>({
+    const {control, handleSubmit, watch} = useForm<FormType>({
         defaultValues: {
             formTitle: "제목 없는 설문지",
             formDescription: "",
@@ -34,7 +34,7 @@ const QuestionForm = () => {
                     type: "radio",
                     question: "질문",
                     options: [{
-                        
+                        optionTitle: ""
                     }],
                     required: false,
                 }
@@ -52,8 +52,8 @@ const QuestionForm = () => {
 
     const insertQuestionCard = () => {
         append({type: "radio", question: "질문", options: [{
-                        optionTitle: "옵션"
-                }], required: false});
+            optionTitle: ""
+        }], required: false});
     }
 
     const copyQuestionCard = (index:number) => {
@@ -65,8 +65,8 @@ const QuestionForm = () => {
     }
 
     useEffect(() => {
-        console.log(fields);
-    }, [fields]);
+
+    }, [watch()]);
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>

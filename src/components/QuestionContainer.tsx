@@ -7,7 +7,7 @@ import Switch from '@mui/material/Switch';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import RadioButtonUncheckedRoundedIcon from '@mui/icons-material/RadioButtonUncheckedRounded';
 import CheckBoxOutlineBlankRoundedIcon from '@mui/icons-material/CheckBoxOutlineBlankRounded';
-import { useController, useFieldArray } from 'react-hook-form';
+import { useController } from 'react-hook-form';
 import UnderlineInput from './Underlineinput';
 import DropdownMenu from './DropdownMenu';
 import QuestionList from './QuestionList';
@@ -20,8 +20,8 @@ interface QuestionCardPageProps {
     control: any;
     active: number | null;
     setActive: any;
-    copyQuestionCard: any;
-    deleteQuestionCard: any;
+    copyQuestionCard: (index: number) => void;
+    deleteQuestionCard: (index: number) => void;
 }
 
 const QuestionContainer = ({
@@ -30,7 +30,7 @@ const QuestionContainer = ({
     active,
     setActive,
     copyQuestionCard,
-    deleteQuestionCard
+    deleteQuestionCard,
 }: QuestionCardPageProps) => {
     const name = `questionCardList.${idx}`;
     const [isCollapse, setIsCollapse] = useState<boolean>(false);

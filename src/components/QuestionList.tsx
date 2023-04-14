@@ -1,8 +1,9 @@
 import { useController, useFieldArray, useForm } from "react-hook-form";
 import RadioButtonUncheckedRoundedIcon from '@mui/icons-material/RadioButtonUncheckedRounded';
 import CheckBoxOutlineBlankRoundedIcon from '@mui/icons-material/CheckBoxOutlineBlankRounded';
+import CropOriginalIcon from '@mui/icons-material/CropOriginal';
 import CloseIcon from '@mui/icons-material/Close';
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import IconButton from "./IconButton";
 
 // 배열 쓰기
@@ -60,20 +61,36 @@ const QuestionList = ({ control, name, idx }: any) => {
                     {
                         value.type === "dropdown" && <span>{index + 1}</span>
                     }
-                    <div className="w-3/5 relative">
+                    <div className="w-4/5 relative">
                         <input placeholder="옵션" key={field.id} {...register(`${value}.options.${index}.optionTitle`)}
                         onKeyDown={(e: any) => (e.keyCode === 13 && insertOption(index, e.target.value))}
                         className=" ml-2 w-full outline-none placeholder:text-black py-1 z-0 peer" />
-                        <div className="absolute w-full bottom-0 ml-2 peer-focus:animate-bdbottom peer-focus:border-b peer-focus:border-[#673ab7] peer-hover:border-b"></div>
+                        <div className="absolute w-full bottom-0 ml-2 peer-focus:animate-bdbottom peer-focus:border-b-2 peer-focus:border-[#4c2b87] peer-hover:border-b"></div>
+                    </div>
+                    <div className="absolute right-[4.5rem]">
+                        <IconButton>
+                            <CropOriginalIcon color="action"/>
+                        </IconButton>
                     </div>
                     
-                    <div className="absolute right-8" onClick={() => (deleteOption(index))}>
+                    <div className="absolute right-[2rem]" onClick={() => (deleteOption(index))}>
                         <IconButton>
                             <CloseIcon color="action"/>
                         </IconButton>
                     </div>
                     
                 </div>))}
+                {/* <div className="h-[3rem] flex items-center text-sm mb-1 pl-1">
+                    {
+                        value.type === "radio" ? <RadioButtonUncheckedRoundedIcon color="disabled" />
+                        : value.type === "checkbox" ? <CheckBoxOutlineBlankRoundedIcon color="disabled" />
+                        : <span>1</span>
+                    }
+                    <div>
+                        <span className="text-[#5f6368] ml-2 box-content" onClick={() => }>옵션 추가</span>
+                    </div>
+                </div> */}
+
         </div>
 
     )
