@@ -114,7 +114,7 @@ const QuestionContainer = ({
                 <div className="w-[48rem] mt-2.5 my-0 mx-auto rounded-lg bg-white relative border border-gray-300 peer-box" onClick={handleActiveClick} >
                     <div className="h-full w-1.5 bg-[#4285f4] absolute top-0 left-0 rounded-tl-lg rounded-bl-lg z-0"></div>
                     <div className="rounded-md w-10 h-10 bg-white shadow-sm shadow-[#999] absolute top-3 -right-12" onClick={insertQuestionCard}>
-                        <IconButton >
+                        <IconButton label="항목추가">
                             <ControlPointIcon  color="action" />
                         </IconButton>
                     </div>
@@ -132,10 +132,8 @@ const QuestionContainer = ({
                                 name={`${name}.question`}
                             />
                         </div>
-                        <div className='w-[5rem] flex justify-center'>
-                            <IconButton>
-                                <CropOriginalIcon color="action" />
-                            </IconButton>
+                        <div className='w-[5rem] flex justify-center mt-3'>
+                            <CropOriginalIcon color="action" />
                         </div>
 
 
@@ -146,7 +144,7 @@ const QuestionContainer = ({
                     {/* 하단 아이콘 */}
                     <div className='relative h-[4rem]'>
                         <div className="w-11/12 h-full text-right border-t border-gray-300 absolute bottom-0 left-8 rounded-b-lg flex items-center justify-end">
-                            <IconButton size="large" onClick={() => (copyQuestionCard(idx, value))}>
+                            <IconButton label="복사" size="large" onClick={() => (copyQuestionCard(idx, value))}>
                                 <ContentCopyIcon color="action" />
                             </IconButton>
                             <IconButton label="삭제" onClick={() => (deleteQuestionCard(idx))}>
