@@ -64,7 +64,7 @@ const DropdownMenu = ({ control, name }: any) => {
                                 <div key={idx} onClick={() => (
                                     selectDropdownMenu(item),
                                     onChange(item.id)
-                                )} className="flex items-center h-[3rem] text-center hover:bg-[#eee] border bg-white">
+                                )} className="flex items-center h-[3rem] text-center hover:bg-[#eee] bg-white border">
                                     <span className="mx-3">{item.icon}</span>
                                     <span >{item.label}</span>
                                 </div>

@@ -2,21 +2,20 @@ import Button from '@mui/material/Button';
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
 import FolderOpenIcon from '@mui/icons-material/FolderOpen';
 import StarOutlineOutlinedIcon from '@mui/icons-material/StarOutlineOutlined';
-import Input from '@mui/material/Input';
 import PaletteOutlinedIcon from '@mui/icons-material/PaletteOutlined';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import UTurnLeftOutlinedIcon from '@mui/icons-material/UTurnLeftOutlined';
 import UTurnRightOutlinedIcon from '@mui/icons-material/UTurnRightOutlined';
 import UnderlineInput from './Underlineinput';
 import { IconButton } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 const Header = ({control}:any) => {
     const [currentPage, setCurrentPage] = useState<string>('question');
 
     return (
         <header className="w-full bg-white border-b">
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between items-center pt-2">
                 <div className="flex items-center gap-1">
                     <div className=" mx-3.5 cursor-pointer rounded-full hover:bg-zinc-100 ">
                         <DescriptionOutlinedIcon color="primary" sx={{ fontSize: '36px' }} />
@@ -51,7 +50,7 @@ const Header = ({control}:any) => {
                     <IconButton>
                         <UTurnRightOutlinedIcon color="action" className="-rotate-90" />
                     </IconButton>
-                    <div className="p-4"><Button type="submit" variant="contained" sx={{ width: '5.25rem' }}>보내기</Button></div>
+                    <Button type="submit" variant="contained" sx={{ width: '5.25rem', padding: '6px', marginRight: '20px'}}>보내기</Button>
                 </div>
             </div>
             <div>

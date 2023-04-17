@@ -65,12 +65,8 @@ const QuestionContainer = ({
     });
 
     useEffect(() => {
-        console.log('value', value);
-    }, [value]);
 
-    useEffect(() => {
-        console.log('checked', check);
-    }, [check]);
+    }, [value]);
 
 
     if (idx !== active) {
@@ -83,22 +79,22 @@ const QuestionContainer = ({
                             <DragIndicatorSharpIcon className="rotate-90 text-gray-400" fontSize="small" />
                         </div>
                         <div className="w-11/12 mx-auto mb-[24px]">
-                            <div className="pb-2 text-base">{value.question}</div>
+                            <div className="py-1 text-base">{value.question}</div>
                             {
                                 value.options && value.options.map((option: any, idx: number) => (
                                     <div className="h-[3rem] flex items-center" key={idx}>
                                         <span>
                                             {
-                                                value.type === "radio" && <RadioButtonUncheckedRoundedIcon color="disabled" className="w-[30px] h-[20px]" />
+                                                value.type === "radio" && <RadioButtonUncheckedRoundedIcon color="disabled" className="w-[20px] h-[20px]" />
                                             }
                                             {
-                                                value.type === "checkbox" && <CheckBoxOutlineBlankRoundedIcon color="disabled" className="w-[30px] h-[20px]" />
+                                                value.type === "checkbox" && <CheckBoxOutlineBlankRoundedIcon color="disabled" className="w-[20px] h-[20px]" />
                                             }
                                             {
                                                 value.type === "dropdown" && <span>{idx + 1}</span>
                                             }
                                         </span>
-                                        <div className='ml-2'> {option.optionTitle}</div>
+                                        <div className='ml-2 text-sm'> {option.optionTitle}</div>
                                     </div>
                                 ))
                             }
@@ -116,11 +112,11 @@ const QuestionContainer = ({
                 value &&
                 <div className="w-[48rem] mt-2.5 my-0 mx-auto rounded-lg bg-white relative border border-gray-300 peer-box" onClick={handleActiveClick} >
                     <div className="h-full w-1.5 bg-[#4285f4] absolute top-0 left-0 rounded-tl-lg rounded-bl-lg z-0"></div>
-                    <button type="button" className="rounded-md w-10 h-10 bg-white shadow-sm shadow-[#999] absolute top-3 -right-12" onClick={insertQuestionCard}>
-                        <IconButton>
-                            <ControlPointIcon />
+                    <div className="rounded-md w-10 h-10 bg-white shadow-sm shadow-[#999] absolute top-3 -right-12" onClick={insertQuestionCard}>
+                        <IconButton >
+                            <ControlPointIcon  color="action" />
                         </IconButton>
-                    </button>
+                    </div>
                     <div className="w-full h-[24px] flex items-center justify-center cursor-move" >
                         <DragIndicatorSharpIcon className="rotate-90 text-gray-400" fontSize="small" />
                     </div>
@@ -156,9 +152,9 @@ const QuestionContainer = ({
                                 <DeleteOutlineIcon fontSize="inherit" />
                             </IconButton>
                             <span className="border-l h-8 inline-block align-middle pr-4 "></span>
-                            <span>필수 <Switch name={`${name}.required`} onChange={(e) => (handleSwitch(e.target.checked), setCheck(e.target.checked))} defaultChecked={check ? true : false} />
+                            <span className='text-sm'>필수 <Switch name={`${name}.required`} onChange={(e) => (handleSwitch(e.target.checked), setCheck(e.target.checked))} checked={check ? true : false} />
                             </span>
-                            <IconButton>
+                            <IconButton >
                                 <MoreVertIcon color="action" />
                             </IconButton>
                         </div>

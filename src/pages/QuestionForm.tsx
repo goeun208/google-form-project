@@ -58,8 +58,7 @@ const QuestionForm = () => {
     }
 
     const copyQuestionCard = (index:number, card: any) => {
-        // insert(index + 1, fields[index]);
-        insert(index + 1, JSON.parse(JSON.stringify(card)))
+        insert(index + 1, JSON.parse(JSON.stringify(card)));
     }
 
     const deleteQuestionCard = (index:number) => {
@@ -70,16 +69,12 @@ const QuestionForm = () => {
         // console.log(watch());
     }, [watch()]);
 
-    useEffect(() => {
-        console.log(active);
-    }, [active]);
-
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
            <Header control={control} handleSubmit={handleSubmit}/>
             <div className="pt-2.5">
                 {/* 타이틀 */}
-            <div className="w-[48rem] h-36 my-0 mx-auto rounded-lg pt-2.5 bg-white relative shadow-sm shadow-[#888] relative" onClick={() => setActive(null)}>
+                <div className="w-[48rem] h-36 my-0 mx-auto rounded-lg pt-2.5 bg-white relative shadow-sm shadow-[#888] relative" onClick={() => setActive(null)}>
                 <div className="w-full h-2.5 bg-[#673ab7] absolute top-0 rounded-t-lg z-10"></div>
                 { active === null && <div className="h-full w-1.5 bg-[#4285f4] absolute top-0 left-0 rounded-tl-lg rounded-bl-lg z-0"></div> }
                 <UnderlineInput
@@ -97,11 +92,11 @@ const QuestionForm = () => {
                 />
                 {
                     active === null &&
-                    <button type="button" className="rounded-md w-10 h-10 bg-white shadow-sm shadow-[#999] absolute top-3 -right-12" onClick={insertQuestionCard}> 
+                    <div className="rounded-md w-10 h-10 bg-white shadow-sm shadow-[#999] absolute top-3 -right-12" onClick={insertQuestionCard}> 
                         <IconButton>
-                            <ControlPointIcon />
+                            <ControlPointIcon color="action" />
                         </IconButton>
-                    </button>
+                    </div>
                 }
                 
             </div>
