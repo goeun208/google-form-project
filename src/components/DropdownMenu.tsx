@@ -58,13 +58,13 @@ const DropdownMenu = ({ control, name }: any) => {
         <div>
             {isOpen ?
                 <div className="ml-2 shadow-lg absolute -top-6 right-[15rem] rounded-[4px] z-10">
-                    <div className="text-sm text-center w-[13rem] h-[3rem] absolute top-0" onClick={handleChange}>
+                    <div className="text-sm text-center w-[13rem] absolute border top-0" onClick={handleChange}>
                         {
                             dropDownItems.map((item: DropDownItemType, idx: number) => (
                                 <div key={idx} onClick={() => (
                                     selectDropdownMenu(item),
                                     onChange(item.id)
-                                )} className="flex items-center h-[3rem] text-center hover:bg-[#eee] bg-white border">
+                                )} className="flex items-center h-[3rem] text-center hover:bg-[#eee] bg-white ">
                                     <span className="mx-3">{item.icon}</span>
                                     <span >{item.label}</span>
                                 </div>
