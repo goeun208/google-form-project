@@ -1,4 +1,4 @@
-import IconButton from '@mui/material/IconButton';
+
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import DragIndicatorSharpIcon from "@mui/icons-material/DragIndicatorSharp";
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
@@ -14,6 +14,7 @@ import DropdownMenu from './DropdownMenu';
 import QuestionList from './QuestionList';
 import { useCallback, useEffect, useState } from 'react';
 import { CardType } from '../pages/QuestionForm';
+import IconButton from './IconButton';
 
 interface QuestionCardPageProps {
     idx: number;
@@ -148,13 +149,13 @@ const QuestionContainer = ({
                             <IconButton size="large" onClick={() => (copyQuestionCard(idx, value))}>
                                 <ContentCopyIcon color="action" />
                             </IconButton>
-                            <IconButton size="large" onClick={() => (deleteQuestionCard(idx))}>
-                                <DeleteOutlineIcon fontSize="inherit" />
+                            <IconButton label="삭제" onClick={() => (deleteQuestionCard(idx))}>
+                                <DeleteOutlineIcon color="action" />
                             </IconButton>
                             <span className="border-l h-8 inline-block align-middle pr-4 "></span>
                             <span className='text-sm'>필수 <Switch name={`${name}.required`} onChange={(e) => (handleSwitch(e.target.checked), setCheck(e.target.checked))} checked={check ? true : false} />
                             </span>
-                            <IconButton >
+                            <IconButton label="더보기">
                                 <MoreVertIcon color="action" />
                             </IconButton>
                         </div>
