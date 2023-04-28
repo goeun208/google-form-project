@@ -144,12 +144,17 @@ const QuestionContainer = ({
                     {/* 하단 아이콘 */}
                     <div className='relative h-[4rem]'>
                         <div className="w-11/12 h-full text-right border-t border-gray-300 absolute bottom-0 left-8 rounded-b-lg flex items-center justify-end">
-                            <IconButton label="복사" size="large" onClick={() => (copyQuestionCard(idx, value))}>
-                                <ContentCopyIcon color="action" />
-                            </IconButton>
-                            <IconButton label="삭제" onClick={() => (deleteQuestionCard(idx))}>
-                                <DeleteOutlineIcon color="action" />
-                            </IconButton>
+                            
+                            <div onClick={() => (copyQuestionCard(idx, value))}>
+                                <IconButton label="복사" size="large">
+                                    <ContentCopyIcon color="action" />
+                                </IconButton>
+                            </div>
+                            <div onClick={() => (deleteQuestionCard(idx))}>
+                                <IconButton label="삭제">
+                                    <DeleteOutlineIcon color="action" />
+                                </IconButton>
+                            </div>
                             <span className="border-l h-8 inline-block align-middle pr-4 "></span>
                             <span className='text-sm'>필수 <Switch name={`${name}.required`} onChange={(e) => (handleSwitch(e.target.checked), setCheck(e.target.checked))} checked={check ? true : false} />
                             </span>

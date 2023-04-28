@@ -58,10 +58,12 @@ const QuestionForm = () => {
     }
 
     const copyQuestionCard = (index:number, card: any) => {
+        console.log('copy');
         insert(index + 1, JSON.parse(JSON.stringify(card)));
     }
 
     const deleteQuestionCard = (index:number) => {
+        console.log('remove');
         remove(index);
     }
 
